@@ -15,10 +15,18 @@
 - Do NOT make exploratory calls before the real ingestion run
 - Set real key in `.env`: `TARGET_API_KEY=<your_key>` + `API_BASE_URL=http://datasync-dev-alb-101078500.us-east-1.elb.amazonaws.com`
 
+## Working Rules
+
+- **NEVER modify `run-ingestion.sh`** — it is owned by the challenge spec and must not be touched
+- **Verify everything on the Internet before using it** — check docs/PyPI for correct API, flags, and versions before writing code that uses any library, CLI tool, or Docker feature
+- **Python version:** always match what is declared in `.devcontainer/devcontainer.json` (currently `"version": "3.12"` for the Python devcontainer feature); do not hardcode a different version
+- **Autoformat all Python code with `ruff format`** before considering any file done; add `ruff` to dev-dependencies if not already present and run `uv run ruff format src/ tests/` after writing files
+
 ## Stack
 
-- **Language:** Python 3.12
-- **Package manager:** uv (`pyproject.toml` in each package)
+- **Language:** Python (version from devcontainer — currently 3.12)
+- **Package manager:** uv (`pyproject.toml` in each package, `hatchling` build backend)
+- **Linter/formatter:** `ruff` (format + lint) — run `uv run ruff format` on all Python files
 - **HTTP:** `httpx` (async, persistent connection pool)
 - **PostgreSQL:** `asyncpg`
 - **Mock API:** `fastapi` + `uvicorn` (testing only)
