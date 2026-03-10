@@ -29,3 +29,6 @@ popd || exit 1
 
 # Install Claude Code.
 npm install -g @anthropic-ai/claude-code
+
+# Run ingestion logic.
+sh run-ingestion.sh
