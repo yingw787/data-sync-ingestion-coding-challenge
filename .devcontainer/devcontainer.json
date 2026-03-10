@@ -1,0 +1,116 @@
+// The Dev Container format allows you to configure your environment. At the
+// heart of it is a Docker image or Dockerfile which controls the tools
+// available in your environment.
+//
+// See https://aka.ms/devcontainer.json for more information.
+{
+  "name": "Coding Challenge",
+  "image": "mcr.microsoft.com/vscode/devcontainers/base:ubuntu",
+  "remoteUser": "vscode",
+  "mounts": [
+    "source=${localEnv:HOME}/.gitconfig,target=/home/vscode/.gitconfig,type=bind,consistency=cached"
+  ],
+  "postCreateCommand": "bash setup.sh",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "antfu.vite",
+        "anthropic.claude-code",
+        "charliermarsh.ruff",
+        "davidanson.vscode-markdownlint",
+        "dbaeumer.vscode-eslint",
+        "donjayamanne.githistory",
+        "dnut.rewrap-revived",
+        "dsznajder.es7-react-js-snippets",
+        "eamodio.gitlens",
+        "ecmel.vscode-html-css",
+        "esbenp.prettier-vscode",
+        "fabiospampinato.vscode-diff",
+        "firefox-devtools.vscode-firefox-debug",
+        "firsttris.vscode-jest-runner",
+        "github.vscode-github-actions",
+        "github.vscode-pull-request-github",
+        "gitpod.gitpod-flex",
+        "grapecity.gc-excelviewer",
+        "gruntfuggly.todo-tree",
+        "hashicorp.terraform",
+        "janisdd.vscode-edit-csv",
+        "jasonnutter.vscode-codeowners",
+        "mikestead.dotenv",
+        "mindaro-dev.file-downloader",
+        "mrmlnc.vscode-json5",
+        "ms-azuretools.vscode-containers",
+        "ms-kubernetes-tools.vscode-kubernetes-tools",
+        "ms-playwright.playwright",
+        "ms-vscode.js-debug-nightly",
+        "ms-vscode.live-server",
+        "ms-vscode.vscode-typescript-next",
+        "ms-vsliveshare.vsliveshare",
+        "nrwl.angular-console",
+        "orta.vscode-jest",
+        "pkief.markdown-checkbox",
+        "rafaelmaiolla.diff",
+        "redhat.vscode-yaml",
+        "SanjulaGanepola.github-local-actions",
+        "tamasfe.even-better-toml",
+        "tomoki1207.pdf",
+        "xabikos.javascriptsnippets"
+      ],
+      "settings": {
+        "editor.wordWrap": "wordWrapColumn",
+        "files.insertFinalNewline": true,
+        "files.watcherExclude": {
+          "**/.git/objects/**": true,
+          "**/.git/subtree-cache/**": true,
+          "**/.nx/*/**": true,
+          "**/.pnpm-store/*/**": true,
+          "**/coverage/*/**": true,
+          "**/dist/*/**": true,
+          "**/node_modules/*/**": true,
+          "**/tmp/*/**": true
+        },
+        "search.exclude": {
+          "**/.git/objects/**": true,
+          "**/.git/subtree-cache/**": true,
+          "**/.nx/*/**": true,
+          "**/.pnpm-store/*/**": true,
+          "**/coverage/*/**": true,
+          "**/dist/*/**": true,
+          "**/node_modules/*/**": true,
+          "**/tmp/*/**": true
+        },
+        "files.trimFinalNewlines": true,
+        "files.trimTrailingWhitespace": true,
+        "editor.renderWhitespace": "boundary",
+        "workbench.colorTheme": "Solarized Dark",
+        "editor.tokenColorCustomizations": {
+          "textMateRules": [
+            {
+              "name": "Comment",
+              "scope": [
+                "comment",
+                "comment.block",
+                "comment.block.documentation",
+                "comment.line",
+                "punctuation.separator"
+              ],
+              "settings": {
+                "fontStyle": ""
+              }
+            }
+          ]
+        },
+        "editor.tabSize": 2
+      }
+    }
+  },
+  // Features add additional features to your environment. See
+  // https://containers.dev/features Beware: features are not supported on all
+  // platforms and may have unintended side-effects.
+  "features": {
+    // This is necessary for running Supabase, which comes as a docker-compose
+    // instance running within the DevContainer Docker instance.
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  },
+  "portsAttributes": {}
+}
