@@ -18,7 +18,7 @@
 ## Working Rules
 
 - **NEVER modify `run-ingestion.sh`** — it is owned by the challenge spec and must not be touched
-- **Config defaults belong in `config.py` only** — `docker-compose.yml` passes env vars as `${VAR}` (no `:-default` fallbacks); defining defaults in both places causes drift
+- **Config defaults belong in `config.py` only** — `docker-compose.yml` passes env vars as `${VAR}` (no `:-default` fallbacks); defining defaults in both places causes drift. Use `os.environ.get("VAR") or "default"` (not `get("VAR", "default")`) so empty strings from Docker Compose also fall back to the default
 - **Verify everything on the Internet before using it** — check docs/PyPI for correct API, flags, and versions before writing code that uses any library, CLI tool, or Docker feature
 - **Python version:** always match what is declared in `.devcontainer/devcontainer.json` (currently `"version": "3.12"` for the Python devcontainer feature); do not hardcode a different version
 - **Autoformat all Python code with `ruff format`** before considering any file done; add `ruff` to dev-dependencies if not already present and run `uv run ruff format src/ tests/` after writing files
