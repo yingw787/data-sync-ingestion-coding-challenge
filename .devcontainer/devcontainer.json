@@ -110,7 +110,9 @@
   "features": {
     // This is necessary for running Supabase, which comes as a docker-compose
     // instance running within the DevContainer Docker instance.
-    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    "ghcr.io/devcontainers/features/python:1": {},
+    "ghcr.io/astral-sh/uv:latest": {}
   },
   "portsAttributes": {}
 }
