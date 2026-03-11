@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "Read(//usr/local/bin/**)",
+      "Read(//home/vscode/.nvm/versions/**)",
+      "Bash(docker compose:*)"
+    ]
+  }
+}
