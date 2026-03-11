@@ -5,6 +5,7 @@ from __future__ import annotations
 import asyncio
 import time
 from dataclasses import dataclass
+import os
 from typing import Any
 
 import httpx
@@ -15,8 +16,6 @@ from tenacity import (
     wait_exponential,
 )
 
-from .config import config
-
 _client: httpx.AsyncClient | None = None
 
 
@@ -24,7 +23,7 @@ def get_client() -> httpx.AsyncClient:
     global _client
     if _client is None:
         _client = httpx.AsyncClient(
-            headers={"X-API-Key": config.api_key},
+            headers={"X-API-Key": os.getenv("API_KEY")},
             timeout=30.0,
         )
     return _client
@@ -59,7 +58,7 @@ async def fetch_page(cursor: str | None, limit: int) -> PageResult:
 
     try:
         response = await client.get(
-            f"{config.api_base_url}/api/v1/events",
+            f"{os.getenv("API_BASE_URL")}/api/v1/events",
             params=params,
         )
     except (httpx.TransportError, httpx.TimeoutException) as exc:
@@ -70,7 +69,7 @@ async def fetch_page(cursor: str | None, limit: int) -> PageResult:
     reset_hdr = response.headers.get("x-ratelimit-reset")
     if remaining_hdr is not None:
         remaining = int(remaining_hdr)
-        if remaining <= config.rate_limit_buffer and reset_hdr is not None:
+        if remaining <= int(os.getenv("RATE_LIMIT_BUFFER")) and reset_hdr is not None:
             wait = int(reset_hdr) - time.time() + 0.1
             if wait > 0:
                 await asyncio.sleep(wait)
